@@ -1,1 +1,0 @@
-cd C:\Users\Alina\Desktop
