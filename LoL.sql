@@ -169,7 +169,7 @@ WITH playerstats AS (
     JOIN Champions c ON ms.champion_id = c.champion_id
     JOIN Matches m ON ms.match_id = m.match_id
     LEFT JOIN MatchItems mi ON mi.match_id = ms.match_id
-    LEFT JOIN Items i ON i.item_id = mi.item_id
+    LEFT JOIN Items i ON i.item_id = mi.item_id AND mi.player_id = ms.player_id
     WHERE m.date_played >= '2025-05-11'
     GROUP BY 
         p.player_id, p.username, c.name, m.match_id, m.date_played,
