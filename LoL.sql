@@ -162,7 +162,7 @@ WITH playerstats AS (
         ms.deaths,
         ms.assists,
         (ms.kills + ms.assists) / COALESCE(NULLIF(ms.deaths, 0), 1) AS KDA, 
-        GROUP_CONCAT(i.name SEPARATOR ', ') AS item_names,
+        i.name as item.name,
         ms.team
     FROM MatchStats ms
     JOIN Players p ON ms.player_id = p.player_id
@@ -173,7 +173,7 @@ WITH playerstats AS (
     WHERE m.date_played >= '2025-05-11'
     GROUP BY 
         p.player_id, p.username, c.name, m.match_id, m.date_played,
-        ms.kills, ms.deaths, ms.assists, ms.team
+        ms.kills, ms.deaths, ms.assists, ms.team, i.name
 )
 SELECT * FROM (
     SELECT * FROM playerstats WHERE team = 'Blue'
